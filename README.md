@@ -30,15 +30,4 @@ npm run build
 
 ## Deployment
 
-### Install static server
-
-```sh
-npm install -g serve
-```
-
-### Run server in Single Page Application
-
-```sh
-serve -s dist
-```
-
+Do with docker, instructions [here](https://cli.vuejs.org/guide/deployment.html#docker-nginx)

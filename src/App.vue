@@ -81,7 +81,7 @@ export default {
                     this.minutes--
                     this.seconds = 59
                 } else if (this.seconds == 0 && this.minutes == 0 && this.hours == 0) {
-                    new Audio('src/assets/beep_message.ogg').play()
+                    new Audio('./beep_message.ogg').play()
                     this.stopTimer()
                     return
                 }
