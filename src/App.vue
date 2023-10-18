@@ -4,11 +4,12 @@
             <h1 class="text-2xl text-center text-white font-bold p-1">StopWatch</h1>
         </header>
         <Alert :show="showError">Timer cannot be zero.</Alert>
+
         <div class="flex flex-col items-center justify-center h-full -mt-10">
             <div class="text-3xl font-bold text-white mb-3" :class="{ 'text-5xl': startedTimer }">
-                <CountDown :hours="showHours" :minutes="showMinutes" :seconds="showSeconds"></CountDown>
+                <CountDown @changetime="changeTime" :hours="showHours" :minutes="showMinutes" :seconds="showSeconds" :started="startedTimer"></CountDown>
             </div>
-            <div v-if="!startedTimer" class="inline-flex rounded-md shadow-sm" role="group">
+            <div v-if="!startedTimer" class="rounded-md shadow-sm hidden lg:inline-flex" role="group">
                 <button @click="changeTime('h')" class="relative inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-l-full group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
                     <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-l-full group-hover:bg-opacity-0 font-bold dark:font-normal">
                         {{ positiveClick ? '+' : '-' }} {{ amountByClick }}
@@ -29,8 +30,11 @@
                 {{ startedTimer ? 'STOP' : 'START' }}
             </button>
 
-            <p v-show="!startedTimer" class="text-black dark:text-white text-xs mt-4"><strong>TIP:</strong> try <kbd class="px-1 py-0.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">Shift</kbd> or
+            <p v-show="!startedTimer" class="text-black dark:text-white text-xs mt-4 lg:block hidden"><strong>TIP:</strong> try <kbd class="px-1 py-0.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">Shift</kbd> or
                 <kbd class="px-1 py-0.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">Ctrl</kbd>
+            </p>
+            <p v-show="!startedTimer" class="text-black dark:text-white text-xs mt-4 lg:hidden block">
+                <strong>TIP:</strong> drag numbers
             </p>
 
         </div>
@@ -99,24 +103,30 @@ export default {
         /**
          @param { String } type The type need to be h,m or s respectively hours, minutes and seconds
          */
-        changeTime(type) {
+        changeTime(type, newValue = undefined) {
             switch (type) {
                 case "h":
                     this.hours = this.positiveClick ? this.hours + this.amountByClick : this.hours - this.amountByClick
                     this.hours = this.hours < 0 ? 0 : this.hours
                     this.hours = this.hours > 23 ? 23 : this.hours
+                    if (newValue !== undefined)
+                        this.hours = newValue
 
                     break;
                 case "m":
                     this.minutes = this.positiveClick ? this.minutes + this.amountByClick : this.minutes - this.amountByClick
                     this.minutes = this.minutes < 0 ? 0 : this.minutes
                     this.minutes = this.minutes > 59 ? 59 : this.minutes
+                    if (newValue !== undefined)
+                        this.minutes = newValue
 
                     break;
                 case "s":
                     this.seconds = this.positiveClick ? this.seconds + this.amountByClick : this.seconds - this.amountByClick
                     this.seconds = this.seconds < 0 ? 0 : this.seconds
                     this.seconds = this.seconds > 59 ? 59 : this.seconds
+                    if (newValue !== undefined)
+                        this.seconds = newValue
                     break;
 
                 default:

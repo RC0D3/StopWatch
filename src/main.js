@@ -1,7 +1,9 @@
-// import './assets/main.css'
+import './index.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'
-import './index.css'
+import { register } from 'swiper/element/bundle'
+
 
 createApp(App).mount('#app')
+register()
