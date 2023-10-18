@@ -1,6 +1,6 @@
-# firstTry
+# StopWatch
 
-This template should help get you started developing with Vue 3 in Vite.
+Project created for study of VueJS
 
 ## Recommended IDE Setup
 
@@ -27,3 +27,18 @@ npm run dev
 ```sh
 npm run build
 ```
+
+## Deployment
+
+### Install static server
+
+```sh
+npm install -g serve
+```
+
+### Run server in Single Page Application
+
+```sh
+serve -s dist
+```
+
