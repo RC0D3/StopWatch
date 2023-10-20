@@ -31,3 +31,7 @@ npm run build
 ## Deployment
 
 Do with docker, instructions [here](https://cli.vuejs.org/guide/deployment.html#docker-nginx)
+
+Or do with [gh-pages](https://cli.vuejs.org/guide/deployment.html#github-pages)
+
+> PS: vite.config.js already change url based on production and development, change 'StopWatch' to your GitHub repository name.
